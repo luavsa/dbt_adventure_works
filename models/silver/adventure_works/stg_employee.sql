@@ -1,12 +1,12 @@
 WITH
    employee_source AS (
         SELECT
-            CAST(businessentityid AS int) AS fk_business_entity,
+            CAST(businessentityid AS int) AS pk_employee,
             CAST(nationalidnumber AS int) AS id_national_number,
             CAST(loginid AS varchar) AS id_login,
             CAST(jobtitle AS varchar) AS job_title,
             CAST(birthdate AS date) AS birth_date,
-            CAST(maritalstatus AS varchar) AS marital_status,
+            CAST(maritalstatus AS varchar) AS maritial_status,
             CAST(gender AS varchar) AS gender,
             CAST(hiredate AS date) AS hire_date,
             CAST(salariedflag AS boolean) AS salaried_flag,

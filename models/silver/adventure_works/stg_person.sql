@@ -14,7 +14,7 @@ WITH
             CAST(demographics AS string) AS person_demographics,
             CAST(rowguid AS string) AS person_rowguid,
             CAST(modifieddate AS string) AS person_modifieddt
-        from {{ source("adventure_works", "person") }}
+        FROM {{ source("adventure_works", "person") }}
     )
 
 SELECT *

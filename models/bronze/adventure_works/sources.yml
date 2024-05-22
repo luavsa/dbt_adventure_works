@@ -59,7 +59,7 @@ sources:
       - name: shoppingcartitem
       - name: specialoffer
       - name: specialofferproduct
-      - name: stateprovincy
+      - name: stateprovince
       - name: store
       - name: transactionhistory
       - name: transactionhistoryarchive

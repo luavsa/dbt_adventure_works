@@ -18,4 +18,8 @@ clean-targets:         # directories to be removed by `dbt clean`
 
 models:
   silver:
+    +schema: dbt_luavercosa
     +materialized: view
+  gold:
+    +schema: dbt_luavercosa
+    +materialized: table

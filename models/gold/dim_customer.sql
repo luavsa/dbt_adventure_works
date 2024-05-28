@@ -18,6 +18,16 @@ store AS (
     FROM {{ ref('stg_store') }}
 ),
 
+pcard AS (
+    SELECT *
+    FROM {{ ref('stg_person_credit_card') }}
+),
+
+card AS (
+    SELECT *
+    FROM {{ ref('stg_credit_card') }}
+),
+
 joined AS (
     SELECT
     customer.pk_customer,
@@ -28,11 +38,14 @@ joined AS (
     address.city,
     address.state_province,
     address.country,
-    address.postal_code
+    address.postal_code,
+    card.credit_card_type
     FROM customer
     LEFT JOIN person ON customer.fk_person = person.pk_business_entity
     LEFT JOIN address ON customer.pk_customer = address.pk_customer
     LEFT JOIN store ON customer.fk_store = store.pk_business_entity
+    LEFT JOIN pcard ON person.pk_business_entity = fk_business_entity_id
+    LEFT JOIN card ON pcard.fk_credit_card_id = card.pk_credit_card_id
 )
 
 SELECT *

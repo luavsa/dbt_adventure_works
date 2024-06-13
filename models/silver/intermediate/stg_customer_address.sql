@@ -6,6 +6,7 @@ WITH customer AS (
 business_entity_address AS (
     SELECT *
     FROM {{ ref('stg_business_entity_address') }}
+    WHERE fk_address_type = 2
 ),
 
 address AS (
@@ -37,7 +38,7 @@ joined AS (
     LEFT JOIN business_entity_address ON customer.fk_person = business_entity_address.fk_business_entity
     LEFT JOIN address ON business_entity_address.fk_address = address.pk_address
     LEFT JOIN state ON address.fk_state_province = state.pk_state_province
-    LEFT JOIN country ON state.COUNTRY_REGION_CODE = country.pk_country
+    LEFT JOIN country ON state.country_region_code = country.pk_country
 )
 
 SELECT *

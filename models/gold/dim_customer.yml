@@ -8,4 +8,5 @@ models:
       - name: pk_customer
         description: Chave primária da dimensão de clientes.
         tests:
+          - unique
           - not_null

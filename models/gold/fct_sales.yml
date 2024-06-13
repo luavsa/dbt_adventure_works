@@ -1,0 +1,11 @@
+version: 2
+
+models:
+  - name: fct_sales
+    description: >
+      Tabela fato das vendas da Adventure Works.
+    columns:
+      - name: pk_order
+        description: Chave primária da fato de vendas.
+        tests:
+          - not_null

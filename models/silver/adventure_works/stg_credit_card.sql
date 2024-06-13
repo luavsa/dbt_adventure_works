@@ -1,6 +1,6 @@
 WITH credit_card_source AS (
         SELECT 
-          CAST(creditcardid AS int) AS pk_credit_card_id, 
+          CAST(creditcardid AS int) AS pk_credit_card, 
           CAST(cardtype AS varchar) AS credit_card_type, 
           CAST(cardnumber AS int) AS credit_card_number, 
           CAST(expmonth AS int) AS card_exp_month, 

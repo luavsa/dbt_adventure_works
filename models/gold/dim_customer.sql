@@ -29,7 +29,7 @@ card AS (
 ),
 
 joined AS (
-    SELECT
+    SELECT DISTINCT
     customer.pk_customer,
     person.person_first_name || ' ' || person.person_middle_name || ' ' || person.person_last_name AS customer,
     store.pk_business_entity AS pk_store,

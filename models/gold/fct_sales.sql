@@ -30,7 +30,7 @@ joined AS (
             WHEN sales.status = 3 THEN 'Backordered'
             WHEN sales.status = 4 THEN 'Rejected'
             WHEN sales.status = 5 THEN 'Shipped'
-            WHEN sales.status = 2 THEN 'Cancelled'
+            WHEN sales.status = 6 THEN 'Cancelled'
             END AS status,
         sales_reason.fk_sales_reason_id AS fk_sales_reason,
         sales.order_subtotal,

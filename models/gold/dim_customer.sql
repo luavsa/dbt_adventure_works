@@ -26,7 +26,7 @@ pcard AS (
 joined AS (
     SELECT DISTINCT
     customer.pk_customer,
-    person.person_first_name || ' ' || person.person_middle_name || ' ' || person.person_last_name AS customer,
+    person.person_name AS customer,
     store.pk_business_entity AS pk_store,
     store.nm_store AS store,
     address.address,
@@ -36,10 +36,10 @@ joined AS (
     address.postal_code,
     pcard.fk_credit_card
     FROM customer
-    LEFT JOIN person ON customer.fk_person = person.pk_business_entity
+    LEFT JOIN person ON customer.fk_person = person.pk_person
     LEFT JOIN address ON customer.pk_customer = address.pk_customer
     LEFT JOIN store ON customer.fk_store = store.pk_business_entity
-    LEFT JOIN pcard ON person.pk_business_entity = pcard.pk_business_entity
+    LEFT JOIN pcard ON person.pk_person = pcard.pk_business_entity
 )
 
 SELECT *

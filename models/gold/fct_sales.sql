@@ -13,14 +13,21 @@ sales_reason AS (
     FROM {{ ref('stg_sales_order_header_sales_reason') }}
 ),
 
+customer AS (
+    SELECT *
+    FROM {{ ref('stg_customer') }}
+),
+
 joined AS (
     SELECT
         sales.pk_sales_order AS pk_order,
         sales_detail.pk_sales_order_detail,
         sales.account_number,
         sales.fk_customer,
+        customer.fk_store,
         sales.fk_sales_person AS fk_employee,
         sales.fk_territory,
+        sales.fk_credit_card,
         sales.order_date,
         sales.due_date,
         sales.ship_date,
@@ -45,6 +52,7 @@ joined AS (
     FROM sales
     LEFT JOIN sales_detail ON sales.pk_sales_order = sales_detail.fk_sales_order
     LEFT JOIN sales_reason ON sales.pk_sales_order = sales_reason.fk_order_id
+    LEFT JOIN customer ON sales.fk_customer = customer.pk_customer
 )
 
 SELECT *

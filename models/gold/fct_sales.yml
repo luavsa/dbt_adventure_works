@@ -13,6 +13,8 @@ models:
         description: chave primária dos registros de detalhe do pedido
       - name: fk_customer 
         description: número de identificação do cliente. Chave estrangeira para Customer.Pk_Customer.
+      - name: fk_store
+        description: chave estrangeira para os registros da tabela de lojas de clientes.
       - name: fk_employee 
         description: número de identificação do funcionário responsável pela venda. Chave estrangeira para Employee.Pk_Employee.
       - name: fk_territory 
@@ -21,6 +23,8 @@ models:
         description: produto vendido ao cliente. Chave estrangeira para Product.Pk_Product
       - name: fk_sales_reason
         description: chave estrangeira para os registros de motivos para a compra
+      - name: fk_credit_card
+        description: chave estrangeira para os registros na tabela dimensão de cartões de crédito
       - name: account_number
         description: referência do número da contabilidade financeira.
       - name: order_date

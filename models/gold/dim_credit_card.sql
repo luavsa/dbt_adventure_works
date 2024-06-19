@@ -12,4 +12,3 @@ joined AS (
 
 SELECT *
 FROM joined
-

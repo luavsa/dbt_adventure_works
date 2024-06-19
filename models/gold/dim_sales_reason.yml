@@ -3,10 +3,14 @@ version: 2
 models:
   - name: dim_sales_reason
     description: >
-      Tabela dimensão dos motivos de venda da Adventure Works.
+      Tabela dimensão dos motivos de venda da Adventure Works
     columns:
       - name: pk_sales_reason
-        description: Chave primária da dimensão de motivos de venda.
+        description: Chave primária da dimensão de motivos de venda
         tests:
           - unique
           - not_null
+      - name: sales_reason
+        description: descrição do motivo da venda
+      - name: type
+        description: categoria à qual pertence o motivo da venda

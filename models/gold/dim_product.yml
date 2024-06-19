@@ -6,7 +6,27 @@ models:
       Tabela dimensão dos produtos da Adventure Works.
     columns:
       - name: pk_product
-        description: Chave primária da dimensão de funcionários.
+        description: Chave primária da dimensão de produtos.
         tests:
           - unique
           - not_null
+      - name: product
+        description: nome do produto
+      - name: number
+        description: número identificador do produto
+      - name: category
+        description: categoria do produto
+      - name: subcategory
+        description: subcategoria do produto
+      - name: model
+        description: modelo do produto
+      - name: unit_measure
+        description: descrição da unidade de medida aplicável ao produto
+      - name: safe_stock_level
+        description: quantidade mínima de estoque.
+      - name: reorder_point
+        description: nível de estoque que aciona um pedido de compra ou ordem de serviço.
+      - name: standard_cost
+        description: custo padrão do produto.
+      - name: list_price
+        description: preço de venda.

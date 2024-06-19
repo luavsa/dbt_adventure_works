@@ -9,3 +9,22 @@ models:
         description: Chave primária da dimensão de funcionários.
         tests:
           - not_null
+          - unique
+      - name: employee
+        description: nome do funcionário.
+      - name: job_title
+        description: cargo do funcionário.
+      - name: birth_date
+        description: data de nascimento do funcionário.
+      - name: maritial_status
+        description: estado civil do funcionário.
+      - name: gender
+        description: gênero do funcionário.
+      - name: hire_date
+        description: data em que o funcionário foi contratado pela Adventure Works.
+      - name: sales_quota
+        description: vendas anuais projetadas.
+      - name: sales_ytd
+        description: total de vendas no ano até o momento.
+      - name: sales_last_year
+        description: total de vendas do ano anterior.

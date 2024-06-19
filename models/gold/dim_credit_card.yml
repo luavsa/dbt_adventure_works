@@ -1,0 +1,14 @@
+version: 2
+
+models:
+  - name: dim_credit_card
+    description: >
+      Tabela dimensão dos tipos de cartões de crédito utilizados pelos clientes da Adventure Works.
+    columns:
+      - name: pk_credit_card
+        description: Chave primária da dimensão de cartões de crédito.
+        tests:
+          - unique
+          - not_null
+      - name: credit_card_type
+        description: nome do cartão de crédito.

@@ -10,3 +10,21 @@ models:
         tests:
           - unique
           - not_null
+      - name: customer
+        description: nome do cliente extraído da fonte "person"
+      - name: pk_store
+        description: l
+      - name: store
+        description: l
+      - name: address
+        description: endereço do cliente
+      - name: city
+        description: cidade do cliente
+      - name: state_province
+        description: estado ou província do cliente
+      - name: country
+        description: país do cliente
+      - name: postal_code
+        description: código postal do cliente
+      - name: fk_credit_card
+        description: chave estrangeira para os registros na tabela dimensão de cartões de crédito

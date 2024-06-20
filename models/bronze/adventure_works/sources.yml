@@ -6,7 +6,7 @@ sources:
     schema: raw_adventure_works
     tables:
       - name: address
-      - name: address_type
+      - name: addresstype
       - name: billofmaterials
       - name: businessentity
       - name: businessentityaddress

@@ -10,6 +10,7 @@ WITH business_entity_address AS (
         "6" AS archive_address_id
     FROM {{ ref('stg_business_entity_address') }}
     PIVOT (MAX(address_id) FOR address_type_id IN (1, 2, 3, 4, 5, 6))
+    
 ),
 
 

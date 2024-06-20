@@ -5,7 +5,7 @@ models:
     description: >
       Tabela dimensão dos produtos da Adventure Works.
     columns:
-      - name: pk_product
+      - name: product_id
         description: Chave primária da dimensão de produtos.
         tests:
           - unique

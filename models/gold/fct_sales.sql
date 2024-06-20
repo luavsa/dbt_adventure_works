@@ -1,21 +1,59 @@
-WITH sales AS (
+    WITH sales AS (
+    
     SELECT *
     FROM {{ ref('stg_sales_order_header') }}
+
 ),
 
 sales_detail AS (
+
     SELECT *
     FROM {{ ref('stg_sales_order_detail') }}
+
+),
+
+sales_reason_header AS (
+
+    SELECT *
+    FROM {{ ref('stg_sales_order_header_sales_reason') }}
+
 ),
 
 sales_reason AS (
+
     SELECT *
-    FROM {{ ref('stg_sales_order_header_sales_reason') }}
+    FROM {{ ref('stg_sales_reason') }}
+
 ),
 
 customer AS (
+
     SELECT *
     FROM {{ ref('stg_customer') }}
+
+),
+
+reason AS (
+
+    SELECT 
+        sales_reason_header.fk_order_id,
+        sales_reason.sales_reason_type,
+        1 AS is_flag
+    FROM sales_reason_header
+    JOIN sales_reason ON sales_reason_header.fk_sales_reason_id = sales_reason.pk_sales_reason
+    
+),
+
+pivot_reason AS (
+
+    SELECT
+        fk_order_id,
+        COALESCE("'Other'", 0) AS is_other,
+        COALESCE("'Promotion'", 0) AS is_promotion,
+        COALESCE("'Marketing'", 0) AS is_marketing
+    FROM reason
+    PIVOT (MAX(is_flag) FOR sales_reason_type IN ('Other', 'Promotion', 'Marketing'))
+
 ),
 
 joined AS (
@@ -24,9 +62,7 @@ joined AS (
         sales_detail.pk_sales_order_detail,
         sales.account_number,
         sales.fk_customer,
-        customer.fk_store,
         sales.fk_sales_person AS fk_employee,
-        sales.fk_territory,
         sales.fk_credit_card,
         sales.order_date,
         sales.due_date,
@@ -39,7 +75,9 @@ joined AS (
             WHEN sales.status = 5 THEN 'Shipped'
             WHEN sales.status = 6 THEN 'Cancelled'
             END AS status,
-        sales_reason.fk_sales_reason_id AS fk_sales_reason,
+        CASE pivot_reason.is_other WHEN 1 THEN sales.pk_sales_order END AS is_other,
+        CASE pivot_reason.is_promotion WHEN 1 THEN sales.pk_sales_order END AS is_promotion,
+        CASE pivot_reason.is_marketing WHEN 1 THEN sales.pk_sales_order END AS is_marketing,
         sales.order_subtotal,
         sales.order_tax_mt,
         sales.order_freight,
@@ -51,8 +89,8 @@ joined AS (
         (sales_detail.order_quantity * (sales_detail.unit_price * (1 - sales_detail.unit_price_discount))) AS total_value
     FROM sales
     LEFT JOIN sales_detail ON sales.pk_sales_order = sales_detail.fk_sales_order
-    LEFT JOIN sales_reason ON sales.pk_sales_order = sales_reason.fk_order_id
-    LEFT JOIN customer ON sales.fk_customer = customer.pk_customer
+    LEFT JOIN pivot_reason ON sales.pk_sales_order = pivot_reason.fk_order_id
+    LEFT JOIN customer ON sales.fk_customer = customer.customer_id
 )
 
 SELECT *

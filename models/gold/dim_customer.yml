@@ -5,7 +5,7 @@ models:
     description: >
       Tabela dimensão dos clientes da Adventure Works.
     columns:
-      - name: pk_customer
+      - name: customer_id
         description: Chave primária da dimensão de clientes.
         tests:
           - unique
